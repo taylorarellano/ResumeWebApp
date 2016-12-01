@@ -1,16 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var account_dal = require('../model/account_dal');
+var company_dal = require('../model/company_dal');
 
 
 // View All schools
 router.get('/all', function(req, res) {
-    account_dal.getAll(function(err, result){
+    company_dal.getAll(function(err, result){
         if(err) {
             res.send(err);
         }
         else {
-            res.render('account/accountViewAll', { 'result':result });
+            res.render('company/companyViewAll', { 'result':result });
         }
     });
 
@@ -18,16 +18,16 @@ router.get('/all', function(req, res) {
 
 // View the school for the given id
 router.get('/', function(req, res){
-    if(req.query.account_id == null) {
-        res.send('account_id is null');
+    if(req.query.company_id == null) {
+        res.send('company_id is null');
     }
     else {
-        account_dal.getById(req.query.account_id, function(err,result) {
+        company_dal.getById(req.query.company_id, function(err,result) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('account/accountViewById', {'result': result});
+                res.render('company/companyViewById', {'result': result});
             }
         });
     }
